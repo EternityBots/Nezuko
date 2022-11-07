@@ -8,7 +8,7 @@
 <p align="center">
 <a href="https://github.com/pratyush4932"><img title="Author" src="https://img.shields.io/badge/Author-Pratyush-red.svg?style=for-the-badge&logo=github"></a>
 </p>
- <a href="https://github.com/Eternity-Bots/Nezuko/blob/main/LICENSE">
+ <a href="https://github.com/EternityBots/Nezuko/blob/main/LICENSE">
   
 <img src='https://img.shields.io/github/license/Eternity-Bots/Nezuko?color=%231e81b0&style=for-the-badge'>
   
@@ -30,7 +30,7 @@
 
 ## 💡 License
 
- Nezuko is free and open-source software licensed under the [GNU Affero General Public License v3.0](https://github.com/Eternity-Bots/Nezuko/blob/master/LICENSE).
+ Nezuko is free and open-source software licensed under the [GNU Affero General Public License v3.0](https://github.com/EternityBots/Nezuko/blob/main/LICENSE).
 
 
 
