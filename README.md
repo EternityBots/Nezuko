@@ -36,7 +36,7 @@
 
 ## RAILWAY 
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https%3A%2F%2Fgithub.com%2FEternity-Bots%2FNezuko)
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template/CMEF82?referralCode=QaaU0X)
 
 
 ## Clone this project
