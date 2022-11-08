@@ -9,14 +9,14 @@ module.exports={
     react:"✅",
 
     start:async(client,m,{})=>{
-        const mod= await db.get('owner')
+        const mod= owner
         let mo=`
-*ETERNITY MODS*
+*🎉 Nezuko Mods 🎉*
 \n`
 for(let i=0;i<mod.length;i++){
-    const um= await client.username(mod[i])
-    mo+=`\n#${i+1}\n*Name:* ${um}\n*Contact:* http://wa.me/+${mod[i].split("@")[0]}\n`
+    const um= await client.username(mod[i]+'@s.whatsapp.net')
+    mo+=`\n✨${i+1}\n*👤 Name:* ${um}\n*📱 Contact:* http://wa.me/+${mod[i].split("@")[0]}\n`
 }
-m.reply(mo)
+await  client.sendMessage(m.from,{image:{url:'https://i.ibb.co/L151594/ff0e5f3793f503df88fcb.png'},caption:mo},{quoted:m})  
     }
 }
