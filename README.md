@@ -10,7 +10,7 @@
 </p>
  <a href="https://github.com/EternityBots/Nezuko/blob/main/LICENSE">
   
-<img src='https://img.shields.io/github/license/Eternity-Bots/Nezuko?color=%231e81b0&style=for-the-badge'>
+<img src='https://img.shields.io/github/license/EternityBots/Nezuko?color=%231e81b0&style=for-the-badge'>
   
 
 <p align="center">
