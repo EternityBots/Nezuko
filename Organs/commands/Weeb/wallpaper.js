@@ -8,7 +8,6 @@ module.exports = {
     name: "wallpaper",
     alias: ["animewallpaper"],
     usage: `${prefa}allpaper <query>`,
-    cool: 10,
     desc: "Gives you the wallpaper...",
     category: "Weeb",
     react: "✅",

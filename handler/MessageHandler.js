@@ -41,7 +41,6 @@ module.exports = async (client, m, commands, chatUpdate) => {
         let pushname =  m.pushName || 'NO name'
         let participants = isGroup ? metadata.participants : [sender]
         const groupName = isGroup ? metadata.subject : ''
-	const owner = [...global.owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net')
 	 const iscreator = [...global.owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
         let groupAdmin = isGroup ? participants.filter(v => v.admin !== null).map(v => v.id) : []
         const botNumber = await client.decodeJid(client.user.id)

@@ -5,7 +5,6 @@ module.exports = {
     name: "waifu",
     alias: ["wife"],
     usage: `${prefa}waifu`,
-    cool: 10,
     desc: "Gives you random waifu image",
     react: "✅",
     

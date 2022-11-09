@@ -5,7 +5,6 @@ module.exports = {
     name: "neko",
     alias: ["nyaa", "cat", "nya"],
     usage: `${prefa}neko`,
-    cool: 10,
     desc: "Gives you random neko image",
     react: "✅",
     
