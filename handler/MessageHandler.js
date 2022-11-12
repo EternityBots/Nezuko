@@ -47,8 +47,6 @@ module.exports = async (client, m, commands, chatUpdate) => {
         let isBotAdmin = isGroup ? groupAdmin.includes(botNumber) : false
         let isAdmin = isGroup ? groupAdmin.includes(sender) : false
    //////////Database\\\\\\\\\\\\\\\\
-   const _mods=await db.get('mods')
-   global.mods= _mods || []
    const _ban= await db.get("ban")
    global.ban=_ban|| []
     const _nsfw=await db.get("nsfw")
@@ -81,14 +79,17 @@ module.exports = async (client, m, commands, chatUpdate) => {
         if (m.message && !isGroup) {    
             console.log("" + "\n" + chalk.black(chalk.bgWhite('[ PRIV ]')), chalk.black(chalk.bgRedBright('PRIVATE CHAT')) + "\n" + chalk.black(chalk.bgWhite('[ TIME ]')), chalk.black(chalk.bgRedBright(new Date)) + "\n" + chalk.black(chalk.bgWhite('[ FROM ]')), chalk.black(chalk.bgRedBright(m.pushName + " @" + m.sender.split('@')[0])) + "\n" + chalk.black(chalk.bgWhite('[ BODY ]')), chalk.black(chalk.bgRedBright(body || type)) + "\n" + "")
         }
-        if (isGroup && mods.includes(`${m.from}`)) {
+        if (isGroup) {
             if (body.includes("://chat.whatsapp.com/")) {
-              if (isAdmin) return
-              m.reply("*Group Link Detected!!!*");
+            if (iscreator){
+            return m.reply('*Ohhh you are mod*')
+            } else if (isAdmin) {
+                return m.reply('*Ohhh you are admin*')
+            } else {
               await client.groupParticipantsUpdate(m.from, [m.sender], 'remove')
           }
           }
-        
+        }
           if (cmd) {
             const randomXp = Math.floor(Math.random() * 3) + 1;//Random amont of XP until the number you want + 1
    const haslUp = await Levels.appendXp(m.sender, "bot", randomXp);
@@ -152,7 +153,6 @@ setTimeout(() => timestamps.delete(m.sender), cdAmount);
                 args,
                 ar,
                 nsfw,
-                mods,
                 isAdmin,
                 groupAdmin,
                 groupName,
