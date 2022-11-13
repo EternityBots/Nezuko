@@ -159,6 +159,7 @@ setTimeout(() => timestamps.delete(m.sender), cdAmount);
                 groupName,
                 text,
                 wlc,
+                mods,
                 quoted,
                 flags,
                 mentionByTag,
