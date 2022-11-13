@@ -47,6 +47,7 @@ module.exports = async (client, m, commands, chatUpdate) => {
         let isBotAdmin = isGroup ? groupAdmin.includes(botNumber) : false
         let isAdmin = isGroup ? groupAdmin.includes(sender) : false
    //////////Database\\\\\\\\\\\\\\\\
+   global.mods= []
    const _ban= await db.get("ban")
    global.ban=_ban|| []
     const _nsfw=await db.get("nsfw")
