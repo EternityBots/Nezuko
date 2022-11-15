@@ -81,7 +81,7 @@ module.exports = async (client, m, commands, chatUpdate) => {
         if (m.message && !isGroup) {    
             console.log("" + "\n" + chalk.black(chalk.bgWhite('[ PRIV ]')), chalk.black(chalk.bgRedBright('PRIVATE CHAT')) + "\n" + chalk.black(chalk.bgWhite('[ TIME ]')), chalk.black(chalk.bgRedBright(new Date)) + "\n" + chalk.black(chalk.bgWhite('[ FROM ]')), chalk.black(chalk.bgRedBright(m.pushName + " @" + m.sender.split('@')[0])) + "\n" + chalk.black(chalk.bgWhite('[ BODY ]')), chalk.black(chalk.bgRedBright(body || type)) + "\n" + "")
         }
-        if (isGroup) {
+        if (isGroup&& mods.includes(`${m.from}`)) {
             if (body.includes("://chat.whatsapp.com/")) {
             if (iscreator){
             return m.reply('*Ohhh you are mod*')
