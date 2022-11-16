@@ -53,7 +53,7 @@ let cm=commands.keys()
         const keys = Object.keys(category);
         for (const key of keys) {
             txt += `*${key.toUpperCase()} ${emo[keys.indexOf(key)]} :* \`\`\`${category[key]
-                .map((cmd) => cmd.name).join(" | ")},\`\`\`\n\n`
+                .map((cmd) => cmd.name).join(" | ")}\`\`\`\n\n`
         }
         txt += `📗 *Type ${prefix}help <Command-Name> or <Command-Name> --info*\n\n`; 
         txt += `*©Eternity-Team*`
