@@ -1,7 +1,7 @@
 {
-  "name": "ETERNITY",
-  "version": "1.0.0",
-  "description": "Whatsapp Bot using Baileys",
+  "name": "Nezuko",
+  "version": "1.0.3",
+  "description": "A simple and easy-to-use WhatsApp bot project based on Multi-Device Baileys and written in JavaScript",
   "main": "heart.js",
   "type": "commonjs",
   "dependencies": {
@@ -66,5 +66,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Eternity-Team",
-  "license": "AGPL-3.0"
+  "license": "AGPL-3.0",
+  "repository": "https://github.com/EternityBots/Nezuko.git",
+  "private": false
 }
