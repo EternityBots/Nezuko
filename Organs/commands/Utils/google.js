@@ -12,7 +12,7 @@ module.exports={
     start:async(client,m,{command,prefix,text,args})=>{
 if (!text)  return m.reply(`Please provide me some text`)
 if (ggle == "none" || null)  return m.reply(`*❤️ Ask owner to give me an API key*`)
-await axios.get(`https://www.googleapis.com/customsearch/v1?q=${text}&key=${ggle}`)
+await axios.get(`https://www.googleapis.com/customsearch/v1?q=${text}&key=${ggle}&cx=baf9bdb0c631236e5`)
 .then((res) => {
     if (res.status !== 200) return void m.reply(`🔍 Error: ${res.status}`);
     let result = ``;
