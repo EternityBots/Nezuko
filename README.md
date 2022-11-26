@@ -41,7 +41,7 @@
 
 ## KOYEB 
 
-[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/apps/deploy?type=docker&image=quay.io/raysenpai69/nezuko:latest&env[PORT]=8080&env[PREFIX]&&env[MONGODB]&&env[DATABASE_URL]&&env[WEATHER_API]&&env[GOOGLE_API]&name=nezuko_bot)
+[![Deploy to Koyeb](https://app.koyeb.com/apps/deploy?type=docker&image=quay.io/raysenpai69/nezuko:latest&env[PORT]=8080&env[PREFIX]=&env[MONGODB]=&env[DATABASE_URL]=&env[WEATHER_API]=&env[GOOGLE_API]=&name=nezuko)](https://app.koyeb.com/apps/deploy?type=docker&image=quay.io/raysenpai69/nezuko:latest&env[PORT]=8080&env[PREFIX]&&env[MONGODB]&&env[DATABASE_URL]&&env[WEATHER_API]&&env[GOOGLE_API]&name=nezuko_bot)
 
 ## Clone this project
 ```bash
