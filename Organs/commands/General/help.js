@@ -43,7 +43,7 @@ let cm=commands.keys()
                     category[info.category].push(info);
                 }
             }
-            const emo=["🍁","🍀","🌊","🎵","🔞","🎟","♨️","🉐",]
+            const emo=["📖","🍁","🍀","🌊","🎵","🔞","🎟","♨️","🉐",]
         
             let txt = `*Kon'nichiwa (｡♡‿♡｡)* ${pushName} Watashiwa *Nezuko Bot*.
                        

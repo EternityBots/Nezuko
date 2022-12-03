@@ -6,8 +6,8 @@ module.exports={
     alias:["dictionary"],
     usage:`${prefa}define [Your word]`,
     desc:"Gives you the meaning of your word ",
-    category:"Utils",
-    react:"✅",
+    category:"Education",
+    react:"📖",
     
     start:async(client,m,{command,prefix,args})=>{
 
