@@ -23,6 +23,7 @@
     "express": "^4.18.2",
     "file-type": "^16.5.3",
     "fluent-ffmpeg": "^2.1.2",
+    "forever": "^4.0.3",
     "form-data": "^4.0.0",
     "g-i-s": "^2.1.6",
     "gif-encoder-2": "^1.0.5",
@@ -41,7 +42,6 @@
     "path": "^0.12.7",
     "pg": "^8.8.0",
     "pino": "^7.9.2",
-    "pm2": "^5.2.2",
     "qrcode": "^1.5.1",
     "qrcode-terminal": "^0.12.0",
     "quick.db": "^9.0.6",
@@ -62,7 +62,7 @@
     "qrcode-terminal": "^0.12.0"
   },
   "scripts": {
-    "start": "pm2 start heart.js --deep-monitoring --attach",
+    "start": "node heart.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Eternity-Team",
