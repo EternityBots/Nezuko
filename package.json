@@ -62,7 +62,7 @@
     "qrcode-terminal": "^0.12.0"
   },
   "scripts": {
-    "start": "pm2 start heart.js --deep-monitoring --attach",
+    "start": "node heart.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Eternity-Team",
