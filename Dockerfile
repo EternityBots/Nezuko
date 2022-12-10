@@ -5,10 +5,10 @@ RUN sudo dnf -y update &&\
     sudo dnf install -y git ffmpeg ImageMagick nodejs yarnpkg libwebp &&\
     sudo dnf clean all -y
 
-COPY package.json .
+WORKDIR /root/nezuko
+
+COPY . /root/nezuko
 
 RUN yarn
-
-COPY . .
 
 CMD ["node", "koyeb.js"]
