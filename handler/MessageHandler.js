@@ -112,7 +112,7 @@ if(text.endsWith("--info")){
     }    
     return client.sendMessage(m.from,buth,{quoted:m})
 }
-if(!isGroup&& cmd && !own.includes(m.sender)) return m.reply("*You cant use commands in dm*")
+if(!isGroup&& cmd && !iscreator) return m.reply("*You cant use commands in dm*")
 if (cmd) {
     if(ban.includes(`${m.sender}`)) return m.reply(`You are banned from using commands ❌`)
   }
