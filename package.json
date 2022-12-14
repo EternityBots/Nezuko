@@ -1,6 +1,6 @@
 {
   "name": "Nezuko",
-  "version": "1.0.4",
+  "version": "1.4.0",
   "description": "A simple and easy-to-use WhatsApp bot project based on Multi-Device Baileys and written in JavaScript",
   "main": "heart.js",
   "type": "commonjs",
