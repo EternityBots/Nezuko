@@ -57,11 +57,7 @@ you've just cloned!!
 > yarn start
 
 To keep it on forever
-
- > npm i pm2
-> pm2 start heart.js
- > pm2 save 
-> pm2 logs
+ > node kyobe.js
 ```
 ## HELP
 > Please give this repo a ⭐ if you liked it.
