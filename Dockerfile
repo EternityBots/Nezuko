@@ -1,4 +1,4 @@
-FROM raysenpai/nezuko:latest
+FROM quay.io/raysenpai69/nezuko:latest
 
 WORKDIR /root/nezuko
 
