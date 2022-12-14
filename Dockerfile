@@ -1,5 +1,7 @@
 FROM raysenpai/nezuko:latest
 
+RUN npm install -g npm@latest
+
 WORKDIR /root/nezuko
 
 COPY . /root/nezuko
