@@ -57,7 +57,7 @@ you've just cloned!!
 > yarn start
 
 To keep it on forever
- > node kyobe.js
+ > node kyoeb.js
 ```
 ## HELP
 > Please give this repo a ⭐ if you liked it.
