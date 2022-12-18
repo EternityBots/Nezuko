@@ -81,8 +81,8 @@ Modifier | Modifier |
 ---|---
 [Toshi_Sama](https://github.com/Toshi-san001)  | [Arin](https://github.com/Arin1601)
 Useless Worker | Contributor |
-<a href="https://github.com/iamherok"><img src="https://github.com/iamherok.png?size=100" width="100" height="100"></a> | [![Alι_Aryαɴ](https://github.com/AliAryanTech.png?size=100)](https://github.com/AliAryanTech) 
-[Tomioka](https://github.com/iamherok)  | [Alι_Aryαɴ](https://github.com/AliAryanTech)
+<a href="https://github.com/Debanjan-San"><img src="https://github.com/Debanjan-San.png?size=100" width="100" height="100"></a> | [![Alι_Aryαɴ](https://github.com/AliAryanTech.png?size=100)](https://github.com/AliAryanTech) 
+[Debanjan-San](https://github.com/Debanjan-San)  | [Alι_Aryαɴ](https://github.com/AliAryanTech)
 Contributor | Contributor |
 <a href="https://github.com/FantoX001"><img src="https://github.com/FantoX001.png?size=100" width="100" height="100"></a> | [![Well/300>](https://github.com/well300.png?size=100)](https://github.com/well300)
 [Fantox](https://github.com/FanotX001)   | [Well/300>](https://github.com/well300)
