@@ -11,7 +11,7 @@ module.exports={
     desc:"shows your profile",
     react:"✅",
     category:"General",
-    start:async(client,m,{command,pushName,groupName,isAdmin,own,mentionByTag,prefix,text,args,quoted,mime})=>{
+    start:async(client,m,{command,pushName,groupName,isAdmin,iscreator,mentionByTag,prefix,text,args,quoted,mime})=>{
         
 
         if(!text){
@@ -117,7 +117,7 @@ let disec = m.sender.substring(3, 7)
 	await	client.sendMessage(m.from,{video: sgif, gifPlayback:true,caption: tex},{quoted:m})
 				}}
                 
-                if(own.includes(m.sender)){
+                if(iscreator){
                     const mention=mentionByTag
                     let users = await (mention[0]) || m.msg.contextInfo.participant
                     let name = await user.findOne({ id:users })
@@ -201,7 +201,6 @@ let disec = users.substring(3, 7)
 			}
 
 			tex += `*🎯 XP*: ${userw.xp} / ${Levels.xpFor(userw.level + 1)}\n\n*🔮 Level*: ${userw.level}\n\n*🏮 Role*: ${role}\n`
-			tex += `\n*💮 Haigusha:* ${ho}\n`
 			let yui = await db.get(`${users}.icon`)
 			if (yui) {
 				ppuser = yui
