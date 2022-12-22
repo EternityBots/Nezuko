@@ -85,7 +85,7 @@ Useless Worker | Contributor |
 [Debanjan-San](https://github.com/Debanjan-San)  | [Alι_Aryαɴ](https://github.com/AliAryanTech)
 Contributor | Contributor |
 <a href="https://github.com/FantoX001"><img src="https://github.com/FantoX001.png?size=100" width="100" height="100"></a> | [![Well/300>](https://github.com/well300.png?size=100)](https://github.com/well300)
-[Fantox](https://github.com/FanotX001)   | [Well/300>](https://github.com/well300)
+[Fantox](https://github.com/FanotX001)   | [Well300>](https://github.com/well300)
 Contributor | Contributor |
 <a href="https://github.com/Chey-san"><img src="https://github.com/Chey-san.png?size=100" width="100" height="100"></a> | [![SaruMan_sama](https://github.com/SarumanSama.png?size=100)](https://github.com/SarumanSama)
 [Chey_San](https://github.com/Chey-san)   | [SaruMan](https://github.com/SarumanSama)
