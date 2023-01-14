@@ -1,6 +1,6 @@
 
 <div align="center">
-<a href="https://www.youtube.com/watch?v=KqgyScOlvV8"><img src="https://images6.alphacoders.com/102/1024472.png" alt="2258810" border="0" /></a>
+<a href="https://www.youtube.com/watch?v=KqgyScOlvV8"><img src="https://i.ibb.co/Mfkw6xT/eternity-5.png" alt="2258810" border="0" /></a>
 
 # **NEZUKO : MULTI DEVICE WHATSAPP BOT WITH COOL FEATURES**
 

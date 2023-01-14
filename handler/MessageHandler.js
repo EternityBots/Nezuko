@@ -70,9 +70,20 @@ module.exports = async (client, m, commands, chatUpdate) => {
         const mentionByTag = type == "extendedTextMessage" && m.message.extendedTextMessage.contextInfo != null ? m.message.extendedTextMessage.contextInfo.mentionedJid : []
        const flags= args.filter((arg) => arg.startsWith('--'))
        if(body.startsWith(prefix)&&!icmd) {
-        var rae = `https://img.stickers.cloud/packs/bae69f3d-4536-48f0-8d73-09429991908c/png/7bc26724-f73c-4493-a665-c2087d02ca9a.png`
-        let txtt =`*${prefix}${cmdName}* is an ⛔ invalid command please use *${prefix}help* to see all commands` 
-        client.sendMessage(m.from,{image:{url:rae}, caption:txtt},{quoted:m})
+        var rae = `https://i.ibb.co/c33ZHCx/wallpaperflare-com-wallpaper.jpg`
+        let txtt =`*${prefix}${cmdName}* is an ⛔ invalid command` 
+        let buttons = [
+        {buttonId: `${prefix}help`, buttonText: {displayText: '⚙️ℍ𝕖𝕝𝕡'}, type: 1}
+            ]
+        
+            let buttonMessage = {
+                image: {url:rae},
+                caption: `${txtt}`,
+                footer: `*©Eternity-Team*`,
+                buttons: buttons,
+                headerType: 4
+            }
+        client.sendMessage(m.from, buttonMessage, { quoted: m })
     }
         
         if (m.message && isGroup&&cmd) {

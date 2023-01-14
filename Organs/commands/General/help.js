@@ -1,3 +1,5 @@
+const { AnimeWallpaper } = require("anime-wallpaper");
+const wall = new AnimeWallpaper();
 module.exports = {
     name: "help",
     alias: ["h","menu"],
@@ -37,29 +39,50 @@ let cm=commands.keys()
                 let info = commands.get(cmd);
                 if (!cmd) continue;
                 if (!info.category || info.category === 'private') continue;
-                if (Object.keys(category).includes(info.category)) category[info.category].push(info);
-                else {
+				if (
+					!info?.category ||
+					(info.category === "Nsfw" &&
+					!(nsfw.includes(m.from)))
+				)
+					continue;
+				if (Object.keys(category).includes(info.category))
+                category[info.category].push(info);
+				else {
                     category[info.category] = [];
                     category[info.category].push(info);
-                }
-            }
-            const emo=["📖","🍁","🍀","🌊","🎵","🔞","🎟","♨️","🉐",]
-        
-            let txt = `*Kon'nichiwa (｡♡‿♡｡)* ${pushName} Watashiwa *Nezuko Bot*.
+				}
+			}
+        if (!nsfw.includes(m.from)) {
+        var emo=["📖","🍁","🍀","🌊","🎵","🎟","♨️","🉐",]
+        } else {
+        var emo=["📖","🍁","🍀","🌊","🎵","🔞","🎟","♨️","🉐",]
+        } 
+        let txt = `*Kon'nichiwa (｡♡‿♡｡)* ${pushName} Watashiwa *Nezuko*.
                        
 🧧 *Prefix :* [ ${prefix} ]
                        
 📝 Here's the *Commands* listed below :\n\n`
         const keys = Object.keys(category);
         for (const key of keys) {
-            txt += `*${key.toUpperCase()} ${emo[keys.indexOf(key)]} :* \`\`\`${category[key]
-                .map((cmd) => cmd.name).join(" | ")}\`\`\`\n\n`
+            txt += `*${key.toUpperCase()} ${emo[keys.indexOf(key)]} :-*  \n\`\`\`${category[key]
+                .map((cmd) => cmd.name).join(", ")}\`\`\`\n\n`
         }
-        txt += `📗 *Type ${prefix}help <Command-Name> or <Command-Name> --info*\n\n`; 
-        txt += `*©Eternity-Team*`
-    const eternitylogo = 'https://cdn.discordapp.com/attachments/1030916817285296231/1033792220370833509/y2mate.com_-_Nezuko_Edit_floating_480p.mp4'
-    client.sendMessage(m.from,{video:{url:eternitylogo}, gifPlayback:true, caption:txt},{quoted:m})
-        //client.sendMessage(m.from,{text:txt},{quoted:m})
+        txt += `📗 Type *${prefix}help* <Command-Name> or <Command-Name> --info\n`; 
+    const eternity = await wall.getAnimeWall5("Nezuko")
+    const eternitylogo = eternity[Math.floor(Math.random() * eternity.length)]
+    const Button = [
+        {buttonId: `${prefix}nezuko`, buttonText: {displayText: '🌟 Script',}, type: 2},
+        {buttonId: `${prefix}support`, buttonText: {displayText: '🎐 Support'}, type: 1},
+    ]
+    let hbutto = {
+        image: {url: eternitylogo.image},
+        caption: txt,
+        footer: '©Eternity-Team',
+        buttons: Button,
+        headerType: 4
+    }
+
+    client.sendMessage(m.from,hbutto,{quoted:m})
 
      }
   }

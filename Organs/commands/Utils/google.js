@@ -19,8 +19,8 @@ await axios.get(`https://www.googleapis.com/customsearch/v1?q=${text}&key=${ggle
     for (const item of res.data?.items) {
         result += `*📒 Title* : ${item.title}\n*🔗Link* : ${item.link}\n*🎯 Description* : ${item.snippet}\n\n`;
     }
- let urll = "https://i.ibb.co/qmbDtY2/acastro-180427-1777-0001-0.jpg"
- client.sendMessage(m.from,{image:{url:urll}, caption:result},{quoted:m})
+img = "https://i.ibb.co/26d2K4d/kindpng-209846.png"
+ client.sendMessage(m.from,{image:{url:img},caption:result},{quoted:m})
 })
 .catch((err) => {
   m.reply(`🔍 Error: ${err}`);
