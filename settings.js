@@ -8,9 +8,9 @@ if (!gg) {
 
 global.owner = gg.split(",");
 global.mongodb = process.env.MONGODB || "none";
-global.prefa = process.env.PREFIX || "."
-global.ggle = process.env.GOOGLE_API || "none"
-global.wter = process.env.WEATHER_API || "none"
+global.prefa = process.env.PREFIX || ".";
+global.ggle = process.env.GOOGLE_API || "none";
+global.wter = process.env.WEATHER_API || "none";
 global.pgdb = process.env.DATABASE_URL || "none";
 global.port = process.env.PORT || 8080;
 
