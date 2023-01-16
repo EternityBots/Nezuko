@@ -1,4 +1,4 @@
-const Ali_Aryan = require("../../../lib/hentai.json")
+const ecchi = require("../../../lib/hentai.json")
 require ('../../../settings')
 module.exports={
     name:"ass",
@@ -11,7 +11,7 @@ module.exports={
     start:async(client,m,{command,prefix,text,args})=>{
     if(!nsfw.includes(`${m.from}`)) return m.reply('*❌ This not a hentai group pervert*')
 
-    let wife = Ali_Aryan.ass
+    let wife = ecchi.ass
     let ass = wife[Math.floor(Math.random() * wife.length)]
 
    let buttons = [
