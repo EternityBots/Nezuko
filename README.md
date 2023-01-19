@@ -36,8 +36,7 @@
 
 ## RAILWAY 
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template/CMEF82?referralCode=QaaU0X)
-
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template/onI3fH?referralCode=QaaU0X)
 
 ## KOYEB 
 
