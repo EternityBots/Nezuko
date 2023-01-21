@@ -37,7 +37,7 @@ const axios = require("axios");
 const session = `./tokens/test.json`;
 const { QuickDB } = require("quick.db");
 global.db = new QuickDB();
-const Auth = require('./Organs/typings/authstore')
+const Auth = require("./Organs/typings/authstore");
 
 const readCommands = () => {
   let dir = path.join(__dirname, "./Organs/commands");
@@ -76,13 +76,12 @@ const app = express();
 let QR_GENERATE = "invalid";
 
 const connect = async () => {
-  await mongoose.connect(mongodb)
+  await mongoose.connect(mongodb);
 
-  const { getAuthFromDatabase } = new Auth(sessionId)
+  const { getAuthFromDatabase } = new Auth(sessionId);
 
-  const { saveState, state, clearState, } = await getAuthFromDatabase()
+  const { saveState, state, clearState } = await getAuthFromDatabase();
 
- 
   let { version, isLatest } = await fetchLatestBaileysVersion();
   let connOptions = {
     printQRInTerminal: true,
@@ -147,7 +146,7 @@ const connect = async () => {
         );
         client.logout();
       } else if (reason === DisconnectReason.loggedOut) {
-        clearState()
+        clearState();
         console.log(`Device Logged Out, Please Scan Again And Run.`);
         process.exit();
       } else if (reason === DisconnectReason.restartRequired) {

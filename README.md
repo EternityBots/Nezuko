@@ -11,7 +11,6 @@
   
 <img src='https://img.shields.io/github/license/EternityBots/Nezuko?color=%231e81b0&style=for-the-badge'>
 
-
 <p align="center">
 <a href="https://github.com/pratyush4932"><img title="Open Source" src="https://img.shields.io/badge/Open%20Source-%E2%99%A5%EF%B8%8F-blue.svg?style=for-the-badge"></a>
 <a href="https://github.com/is7s7whs"><img title="" src="https://img.shields.io/badge/Maintained-YES-green.svg?style=for-the-badge"></a>
@@ -35,11 +34,11 @@ Nezuko is free and open-source software licensed under the [GNU Affero General P
 
 ## RAILWAY
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template/onI3fH?referralCode=QaaU0X)
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template/xhqo2N?referralCode=QaaU0X)
 
 ## KOYEB
 
-[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/apps/deploy?type=docker&image=quay.io/raysenpai69/nezuko:main&env[PORT]=8000&env[PREFIX]&&env[MONGODB]&&env[SESSION_ID]=NEZUKO&env[WEATHER_API]&&env[GOOGLE_API]&&env[MODS]&name=nezuko)
+[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/apps/deploy?type=docker&image=quay.io/raysenpai69/nezuko:main&env[PORT]=8000&env[PREFIX]&&env[MONGODB]&&env[SESSION_ID]=NEZUKO&env[WEATHER_API]&&env[GOOGLE_API]&&env[MODS]&&env[MAL_USERNAME]=PratyushOP&env[MAL_PASSWORD]=8scv98gxDYHVBry&name=nezuko)
 
 ## Clone this project
 
