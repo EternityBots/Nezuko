@@ -1,3 +1,4 @@
+
 class Collections extends Map {
 	constructor(...args) {
 		super(...args);
