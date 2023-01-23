@@ -1,0 +1,126 @@
+body {
+  margin: 0px;
+  height: 100%;
+}
+
+#bgimg {
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://i.ibb.co/Mfkw6xT/eternity-5.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+  bottom: 0;
+  left: 0;
+  top: 0;
+}
+header {
+  background-color: #ffffff40;
+  backdrop-filter: blur(8px);
+  box-shadow: 0px 10px 15px #00000050;
+  height: 160px;
+  text-align: center;
+}
+header span {
+  display: block;
+  font-size: 60px;
+  font-family: "Kanit", sans-serif;
+  font-weight: 300;
+  padding-top: 35px;
+}
+header span::after {
+  font-size: 60px;
+  content: "NITY";
+  color: #db1a1a;
+  font-family: "Kanit", sans-serif;
+  font-weight: 600;
+}
+
+/* MAIN */
+
+main #body {
+  background-color: #ffffff40;
+  backdrop-filter: blur(8px);
+  box-shadow: 0px 10px 15px #00000060, 0px -5px 15px #00000050;
+  font-family: "Kanit", sans-serif;
+  width: max-content;
+  width: 40%;
+  margin: auto;
+  margin-top: 150px;
+  border-radius: 15px;
+}
+main #bodyflex {
+  display: flex;
+  flex-direction: column;
+}
+#wlcm {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: #f10909;
+  font-weight: 600;
+}
+#t1 {
+  padding: 2% 0px;
+  color: #d31010e1;
+  font-size: 40px;
+}
+#t2 {
+  padding: 2% 0px;
+  font-size: 25px;
+}
+#formflex {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  align-items: center;
+  background-color: #e422227a;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-bottom: 2%;
+  border-radius: 12px;
+}
+#session {
+  width: 80%;
+  height: 30px;
+  margin-top: 5%;
+  margin-left: 8%;
+  font-family: "Kanit", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  margin-bottom: 5%;
+  border: none;
+  outline: none;
+  padding-left: 3%;
+  border-radius: 8px;
+}
+button {
+  margin-bottom: 5%;
+  margin-left: 35%;
+  font-size: 130%;
+  font-family: "Kanit", sans-serif;
+  color: #eb1111;
+  font-weight: 600;
+  width: min-content;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+}
+@media screen and (max-width: 500px) {
+  header {
+    height: 100px;
+  }
+  header span {
+    font-size: 40px;
+    padding-top: 20px;
+  }
+  header span::after {
+    font-size: 40px;
+  }
+  main #body {
+    width: 90%;
+  }
+}

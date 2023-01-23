@@ -38,7 +38,7 @@ const session = `./tokens/test.json`;
 const { QuickDB } = require("quick.db");
 global.db = new QuickDB();
 const Auth = require("./Organs/typings/authstore");
-
+const { join } = require("path");
 const readCommands = () => {
   let dir = path.join(__dirname, "./Organs/commands");
   let dirs = fs.readdirSync(dir);
@@ -74,7 +74,7 @@ const PORT = port;
 const app = express();
 //const msgRetryCounterMap=MessageRetryMap
 let QR_GENERATE = "invalid";
-
+let status;
 const connect = async () => {
   await mongoose.connect(mongodb);
 
@@ -125,6 +125,7 @@ const connect = async () => {
 
   client.ev.on("connection.update", async (update) => {
     const { lastDisconnect, connection, qr } = update;
+    status = connection;
     if (connection) {
       await console.info(`Connection Status : ${connection}`);
     }
@@ -322,10 +323,29 @@ const connect = async () => {
 };
 
 connect();
-
-app.use(async (req, res) => {
+app.use("/", express.static(join(__dirname, "public")));
+app.get("/qr", async (req, res) => {
+  const { session } = req.query;
+  if (!session)
+    return void res
+      .status(404)
+      .setHeader("Content-Type", "text/plain")
+      .send("Provide the session id for authentication")
+      .end();
+  if (sessionId !== session)
+    return void res
+      .status(404)
+      .setHeader("Content-Type", "text/plain")
+      .send("Invalid session")
+      .end();
+  if (status == "open")
+    return void res
+      .status(404)
+      .setHeader("Content-Type", "text/plain")
+      .send("Session already exist")
+      .end();
   res.setHeader("content-type", "image/png");
-  res.end(await qrcode.toBuffer(QR_GENERATE));
+  res.send(await qrcode.toBuffer(QR_GENERATE));
 });
 
 app.listen(PORT, () => {
