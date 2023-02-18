@@ -40,6 +40,10 @@ Nezuko is free and open-source software licensed under the [GNU Affero General P
 
 [![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/apps/deploy?type=docker&image=quay.io/raysenpai69/nezuko:main&env[PORT]=8000&env[PREFIX]&&env[MONGODB]&&env[SESSION_ID]=NEZUKO&env[WEATHER_API]&&env[GOOGLE_API]&&env[MODS]&&env[MAL_USERNAME]=PratyushOP&env[MAL_PASSWORD]=8scv98gxDYHVBry&name=nezuko)
 
+## Repl.it
+
+[![Run on Repl.it](https://repl.it/badge/github/EternityBots/Nezuko)](https://repl.it/github/EternityBots/Nezuko)
+
 ## Clone this project
 
 ```bash
