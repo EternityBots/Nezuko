@@ -1,2 +1,2 @@
 language="nodejs"
-run="node koyeb.js"
+run="pm2 start heart.js && pm2 save && pm2 logs"
