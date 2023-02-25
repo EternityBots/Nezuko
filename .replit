@@ -1,0 +1,4 @@
+language="nodejs"
+run="pm2 start heart.js && pm2 save && pm2 logs"
+entrypoint = "heart.js"
+hidden = [".config", "yarn.lock"]
