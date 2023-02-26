@@ -17,7 +17,7 @@ if (wthr.data.shorturl == undefined) m.reply (`${wthr.data.errormessage}`)
 await client.sendMessage(m.from,{text:`🌐 *Your Url :* ${wthr.data.shorturl}`},{quoted:m})
 } catch (err) {
     console.log(err)
-    return m.reply (`${'Something went wrong'}`)
+    return m.reply (`Something went wrong`)
     }
   }
 }
