@@ -12,8 +12,8 @@ module.exports = {
     { command, prefix, iscreator, args, quoted, isAdmin, isBotAdmin }
   ) => {
     let key;
-    if (!m.quoted) return m.reply("```Please mention someone to delete message```")
     if ( !iscreator && !isAdmin) return m.reply("```Only Mod or Admin can delete message```")
+    if (!m.quoted) return m.reply("```Please mention someone to delete message```")
     if (!isBotAdmin) {
       key = {
         remoteJid: m.from,
