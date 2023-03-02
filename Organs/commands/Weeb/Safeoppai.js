@@ -17,7 +17,7 @@ module.exports = {
         let oppai = await axios.get('https://nekopai-apis-main.onrender.com/oppai')
         let buttons = [
             {
-                buttonId: `${prefix} soppai,
+                buttonId: `${prefix} soppai`,
                 buttonText: {
                     displayText: '>>'
                 },
