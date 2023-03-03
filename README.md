@@ -34,11 +34,11 @@ Nezuko is free and open-source software licensed under the [GNU Affero General P
 
 ## RAILWAY
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template/xhqo2N?referralCode=QaaU0X)
+[![Deploy on Railway](https://raw.githubusercontent.com/BinBashBanana/deploy-buttons/main/buttons/remade/railway.svg)](https://railway.app/new/template/xhqo2N?referralCode=QaaU0X)
 
 ## KOYEB
 
-[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/apps/deploy?type=docker&image=quay.io/raysenpai69/nezuko:main&env[PORT]=8000&env[PREFIX]&&env[MONGODB]&&env[SESSION_ID]=NEZUKO&env[WEATHER_API]&&env[GOOGLE_API]&&env[MODS]&&env[MAL_USERNAME]=PratyushOP&env[MAL_PASSWORD]=8scv98gxDYHVBry&name=nezuko)
+[![Deploy to Koyeb](https://raw.githubusercontent.com/BinBashBanana/deploy-buttons/main/buttons/remade/koyeb.svg)](https://app.koyeb.com/apps/deploy?type=docker&image=quay.io/raysenpai69/nezuko:main&env[PORT]=8000&env[PREFIX]&&env[MONGODB]&&env[SESSION_ID]=NEZUKO&env[WEATHER_API]&&env[GOOGLE_API]&&env[MODS]&&env[MAL_USERNAME]=PratyushOP&env[MAL_PASSWORD]=8scv98gxDYHVBry&name=nezuko)
 
 ## Repl.it
 
