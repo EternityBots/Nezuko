@@ -34,7 +34,7 @@ Nezuko is free and open-source software licensed under the [GNU Affero General P
 
 ## RAILWAY
 
-[![Deploy on Railway](https://raw.githubusercontent.com/BinBashBanana/deploy-buttons/main/buttons/remade/railway.svg)](https://railway.app/new/template/xhqo2N?referralCode=QaaU0X)
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template/xhqo2N?referralCode=QaaU0X)
 
 ## KOYEB
 
