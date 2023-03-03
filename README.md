@@ -42,7 +42,7 @@ Nezuko is free and open-source software licensed under the [GNU Affero General P
 
 ## Repl.it
 
-[![Run on Repl.it](https://repl.it/badge/github/EternityBots/Nezuko)](https://repl.it/github/EternityBots/Nezuko)
+[![Run on Repl.it](https://raw.githubusercontent.com/BinBashBanana/deploy-buttons/main/buttons/remade/replit.svg)](https://repl.it/github/EternityBots/Nezuko)
 
 ## 🐧 Linux Auto Install
 
