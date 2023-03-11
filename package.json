@@ -60,7 +60,7 @@
     "qrcode-terminal": "^0.12.0"
   },
   "scripts": {
-    "start": "node heart.js",
+    "start": "node --max_old_space_size=8192 heart.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Eternity-Team",
