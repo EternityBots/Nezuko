@@ -172,6 +172,33 @@ module.exports = async (client, m, commands, chatUpdate) => {
         } else if (isAdmin) {
           return m.reply("*Ohhh you are admin*");
         } else {
+          let key;
+          key = {
+            remoteJid: m.from,
+            fromMe: false,
+            id: m.id,
+            participant: m.sender,
+          };
+          await client.sendMessage(m.from, { delete: key });
+          await client.groupParticipantsUpdate(m.from, [m.sender], "remove");
+        }
+      }
+    }
+    if (isGroup && mods.includes(`${m.from}`)) {
+      if (body.includes("://api.whatsapp.com/")) {
+        if (iscreator) {
+          return m.reply("*Ohhh you are mod*");
+        } else if (isAdmin) {
+          return m.reply("*Ohhh you are admin*");
+        } else {
+          let key;
+          key = {
+            remoteJid: m.from,
+            fromMe: false,
+            id: m.id,
+            participant: m.sender,
+          };
+          await client.sendMessage(m.from, { delete: key });
           await client.groupParticipantsUpdate(m.from, [m.sender], "remove");
         }
       }

@@ -1,31 +1,17 @@
-const ecchi = require("../../../lib/hentai.json")
-require ('../../../settings')
+const HMtai = require("hmtai");
+const hmtai = new HMtai();
+const fs=require("fs")
 module.exports={
     name:"ass",
-    alias:["butt"],
-    usage:`${prefa}ass`,
-    desc:"Gives you hentai ass image",
-    react:"💦",
-
+    alias:["ass"],
+    usage:`${global.prefa}ass`,
+    desc:"I know you like anime ass~ uwu",
     category:"Nsfw",
-    start:async(client,m,{command,prefix,text,args})=>{
-    if(!nsfw.includes(`${m.from}`)) return m.reply('*❌ This not a hentai group pervert*')
-
-    let wife = ecchi.ass
-    let ass = wife[Math.floor(Math.random() * wife.length)]
-
-   let buttons = [
-    {buttonId: `${prefix} ass`, buttonText: {displayText: '>>'}, type: 1}
-    ]
-
-    let buttonMessage = {
-        image: {url:ass},
-        caption: `*💦*`,
-        footer: `*©Eternity-Team*`,
-        buttons: buttons,
-        headerType: 4
-    }
-    client.sendMessage(m.from, buttonMessage, { quoted: m })
+    react:"💦",
+    start:async(client,m,{command,prefix,nsfw,text,args})=>{
+        if(!nsfw.includes(`${m.from}`)) return m.reply('*❌ This not a hentai group pervert*')    
+        let waifud = await hmtai.nsfw.ass();
+       await client.sendMessage(m.from,{image:{url:waifud}},{quoted:m})
 
     }
 }

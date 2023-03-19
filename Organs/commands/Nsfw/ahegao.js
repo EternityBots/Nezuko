@@ -1,4 +1,5 @@
-const ecchi = require("../../../lib/hentai.json")
+const HMtai = require("hmtai");
+const hmtai = new HMtai();
 require ('../../../settings')
 module.exports={
     name:"ahegao",
@@ -11,15 +12,14 @@ module.exports={
     start:async(client,m,{command,prefix,text,args})=>{
     if(!nsfw.includes(`${m.from}`)) return m.reply('*❌ This not a hentai group pervert*')
 
-    let wife = ecchi.ahegao
-    let ass = wife[Math.floor(Math.random() * wife.length)]
+    let waifud = await hmtai.nsfw.ahegao();
 
    let buttons = [
     {buttonId: `${prefix} ahegao`, buttonText: {displayText: '>>'}, type: 1}
     ]
 
     let buttonMessage = {
-        image: {url:ass},
+        image: {url:waifud},
         caption: `*🥵*`,
         footer: `*©Eternity-Team*`,
         buttons: buttons,

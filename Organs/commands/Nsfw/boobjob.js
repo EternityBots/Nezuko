@@ -1,31 +1,16 @@
-const ecchi = require("../../../lib/hentai.json")
-require ('../../../settings')
+const axios = require('axios')
+const fs=require("fs")
 module.exports={
     name:"boobjob",
-    alias:["paizuri"],
-    usage:`${prefa}boobjob`,
-    desc:"Gives you hentai boobjob image",
-    react:"💦",
-
+    alias:["boj","bbj"],
+    usage:`${global.prefa}bbj`,
+    desc:"So soft, round ... gentle ... damn we love it",
     category:"Nsfw",
-    start:async(client,m,{command,prefix,text,args})=>{
-    if(!nsfw.includes(`${m.from}`)) return m.reply('*❌ This not a hentai group pervert*')
-
-    let wife = ecchi.boobjob
-    let ass = wife[Math.floor(Math.random() * wife.length)]
-
-   let buttons = [
-    {buttonId: `${prefix} boobjob`, buttonText: {displayText: '>>'}, type: 1}
-    ]
-
-    let buttonMessage = {
-        image: {url:ass},
-        caption: `*😈*`,
-        footer: `*©Eternity-Team*`,
-        buttons: buttons,
-        headerType: 4
-    }
-    client.sendMessage(m.from, buttonMessage, { quoted: m })
+    react:"💦",
+    start:async(client,m,{command,prefix,text,args,nsfw})=>{
+    if(!nsfw.includes(`${m.from}`)) return m.reply('*❌ This not a hentai group pervert*') 
+       let waifud = await axios.get('https://api.waifu.im/search/?included_tags=paizuri')
+       await client.sendMessage(m.from,{image:{url:waifud.data.images[0].url}},{quoted:m})
 
     }
 }

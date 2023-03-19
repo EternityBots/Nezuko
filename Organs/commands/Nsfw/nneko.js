@@ -1,34 +1,17 @@
-const axios = require("axios");
-const fs = require("fs");
-require("../../../settings");
-module.exports = {
-  name: "nneko",
-  alias: ["nsfwneko"],
-  usage: `${prefa}nneko`,
-  desc: "Gives you random hentai neko image",
-  react: "💦",
+const HMtai = require("hmtai");
+const hmtai = new HMtai();
+const fs=require("fs")
+module.exports={
+    name:"nsfwneko",
+    alias:["nneko"],
+    usage:`${global.prefa}nsfwneko`,
+    desc:"NSFW Neko Girls (Cat Girls)",
+    category:"Nsfw",
+    react:"💦",
+    start:async(client,m,{command,prefix,nsfw,text,args})=>{
+        if(!nsfw.includes(`${m.from}`)) return m.reply('*❌ This not a hentai group pervert*')    
+       let waifud = await hmtai.nsfw.nsfwNeko();
+       await client.sendMessage(m.from,{image:{url:waifud}},{quoted:m})
 
-  category: "Nsfw",
-  start: async (client, m, { command, prefix, text, args }) => {
-    if (!nsfw.includes(`${m.from}`))
-      return m.reply("*❌ This not a hentai group pervert*");
-
-    let wife = await axios.get("https://api.waifu.pics/nsfw/neko");
-    let buttons = [
-      {
-        buttonId: `${prefix} nneko`,
-        buttonText: { displayText: ">>" },
-        type: 1,
-      },
-    ];
-
-    let buttonMessage = {
-      image: { url: wife.data.url },
-      caption: `*🥵 NYAAAAAAA*`,
-      footer: `*©Eternity-Team*`,
-      buttons: buttons,
-      headerType: 4,
-    };
-    client.sendMessage(m.from, buttonMessage, { quoted: m });
-  },
-};
+    }
+}

@@ -1,8 +1,7 @@
-require("../../../settings");
 module.exports = {
   name: "mods",
   alias: ["mod"],
-  usage: `${prefa}mods`,
+  usage: `${global.prefa}mods`,
   desc: "shows mods list",
   category: "General",
   react: "✅",
@@ -11,10 +10,10 @@ module.exports = {
     const mod = global.owner;
     const owner = mod.map((mod) => mod + "@s.whatsapp.net");
     let mo = `
-*🎉 Nᴇᴢᴜᴋᴏ Mᴏᴅs 🎉*\n`;
+       *🎉 Nᴇᴢᴜᴋᴏ Mᴏᴅs 🎉*\n\n`;
     for (let i = 0; i < mod.length; i++) {
       const um = await client.username(mod[i] + "@s.whatsapp.net");
-      mo += `\n*👑 Name:* ${um}\n*🚀 Contact:* @${mod[i].split("@")[0]}\n`;
+      mo += `\n*👑 Name:* ${um}\n*🎖️ Tag:* @${mod[i].split("@")[0]}\n`;
     }
     let urlll = [
       "https://static.moewalls.com/videos/preview/2022/neko-nezuko-kimetsu-no-yaiba-preview.mp4",

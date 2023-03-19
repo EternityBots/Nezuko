@@ -1,4 +1,4 @@
-const findLyrics = require('simple-find-lyrics');
+const lyrics = require("lyric-music"); 
 module.exports = {
     name: "lyrics",
     alias: ["ly"],
@@ -9,17 +9,14 @@ module.exports = {
     start: async(client, m,{text,pushName}) => {       
 if (!text) return m.reply(`❌ No query provided!`)
 try {
-const lyrics = await findLyrics(text)
-if (lyrics.lyrics == '') return console.log("it's f up")
+const lyric = await lyrics(text);
+if (lyric == 'Unknow lyric.') return m.reply("")
+txtt = lyric.split("_").pop()
 var txt = `
-*📕 Title :* ${lyrics.title}
-
-*🧑🏻‍🎤 Artist :* ${lyrics.artist}
-
 *🎶 Lyrics :-* \n
-${lyrics.lyrics}
+${lyric}
 `
- console.log(lyrics)
+ console.log(lyric)
  await client.sendMessage(m.from, {text:txt},{quoted:m})
 } catch (err) {
     console.log(err)
