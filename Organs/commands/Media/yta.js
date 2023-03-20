@@ -8,7 +8,7 @@ module.exports={
     usage:`${prefa}yta yotube_link`,
     desc:"Downloads the audio from youtube links",
     category:"Media",
-    react:"✅",
+    react:"📀",
     start:async(client,m,{command,prefix,text,args})=>{
 if (args.length < 1 || !isUrl(text) || !YT.isYTUrl(text)) return client.sendMessage(m.from,{text:"Where is the yt like?...."},{quoted:m})
 const audio=await YT.mp3(text)
