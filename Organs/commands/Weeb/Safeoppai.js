@@ -14,27 +14,8 @@ module.exports = {
         text
         
     }) => {
-        let oppai = await axios.get('https://nekopai-apis-main.onrender.com/oppai')
-        let buttons = [
-            {
-                buttonId: `${prefix} soppai`,
-                buttonText: {
-                    displayText: '>>'
-                },
-                type: 1
-            }
-    ]
-        
-        let buttonMessage = {
-            image: {
-                url: oppai.data.url
-            },
-            caption: `*Oppai is love!!*`,
-            footer: `*©Eternity-Team*`,
-            buttons: buttons,
-            headerType: 4
-        }
-        client.sendMessage(m.from, buttonMessage, {
+        let oppai = await axios.get('https://api.waifu.im/search/?included_tags=oppai')
+        client.sendMessage(m.from, {image:{url:oppai.data.images[0].url}, caption: `*Oppai is love!!*`}, {
             quoted: m
         })
         

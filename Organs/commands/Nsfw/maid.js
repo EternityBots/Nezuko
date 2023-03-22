@@ -15,19 +15,7 @@ module.exports={
     let a = await axios.get("https://cuteasfubuki.cf/api/maid")
     let waifud = a.data.url
     ray = waifud.split("?")[0]
-
-   let buttons = [
-    {buttonId: `${prefix} maid`, buttonText: {displayText: '>>'}, type: 1}
-    ]
-
-    let buttonMessage = {
-        image: {url:ray},
-        caption: `*🥵*`,
-        footer: `*©Eternity-Team*`,
-        buttons: buttons,
-        headerType: 4
-    }
-    client.sendMessage(m.from, buttonMessage, { quoted: m })
+    client.sendMessage(m.from, {image: {url:ray},caption: `*🥵*`}, { quoted: m })
 
     }
 }

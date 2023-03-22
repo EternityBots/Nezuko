@@ -5,7 +5,7 @@
   "main": "heart.js",
   "type": "commonjs",
   "dependencies": {
-    "@adiwajshing/baileys": "4.4.0",
+    "@adiwajshing/baileys": "5.0.0",
     "@adiwajshing/keyed-db": "^0.2.4",
     "@canvas-fonts/arial-bold": "^1.0.4",
     "anime-wallpaper": "^1.1.1",
@@ -33,7 +33,7 @@
     "mongoose": "^6.10.0",
     "node-fetch": "^3.3.0",
     "node-id3": "^0.2.6",
-    "node-myanimelist": "^4.1.0",
+    "node-myanimelist": "^4.1.2",
     "node-webpmux": "^3.1.0",
     "node-youtube-music": "^0.8.3",
     "parse-ms": "^3.0.0",

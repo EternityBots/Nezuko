@@ -110,23 +110,8 @@ module.exports = async (client, m, commands, chatUpdate) => {
     const flags = args.filter((arg) => arg.startsWith("--"));
     if (body.startsWith(prefix) && !icmd) {
       var rae = `https://i.ibb.co/c33ZHCx/wallpaperflare-com-wallpaper.jpg`;
-      let txtt = `*${prefix}${cmdName}* is an ⛔ invalid command`;
-      let buttons = [
-        {
-          buttonId: `${prefix}help`,
-          buttonText: { displayText: "⚙️ℍ𝕖𝕝𝕡" },
-          type: 1,
-        },
-      ];
-
-      let buttonMessage = {
-        image: { url: rae },
-        caption: `${txtt}`,
-        footer: `*©Eternity-Team*`,
-        buttons: buttons,
-        headerType: 4,
-      };
-      client.sendMessage(m.from, buttonMessage, { quoted: m });
+      let txtt = `*${prefix}${cmdName}* is an ⛔ invalid command \nuse *${prefix}help* to see help menu`;
+      client.sendMessage(m.from, {image:{url:rae}, caption:txtt}, { quoted: m });
     }
 
     if (m.message && isGroup && cmd) {

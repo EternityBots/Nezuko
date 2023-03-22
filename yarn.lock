@@ -2,14 +2,14 @@
 # yarn lockfile v1
 
 
-"@adiwajshing/baileys@4.4.0":
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/@adiwajshing/baileys/-/baileys-4.4.0.tgz#6c39c74a29324d22aec67ddbfda890a8e5d85e37"
-  integrity sha512-5gEnkJBgraLL0USzndxto8ofYhWyMFZVkpZ4rD1nPqrjBjGMt+k+YDpllpFpOfA0yxWZb6nPrr04ikQv++dz2Q==
+"@adiwajshing/baileys@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@adiwajshing/baileys/-/baileys-5.0.0.tgz#17a3e48dd67d0f684d09d55fb8fb931345803bb6"
+  integrity sha512-AeNyYLfw1nhCwc7hDlMajU9Zr5DK4zmEO8rdrmxUR1qUbmhSKOL6IzwZpyvPjsXyHvl+oPMbp5k8+PX2p6RlJg==
   dependencies:
     "@hapi/boom" "^9.1.3"
     axios "^0.24.0"
-    futoin-hkdf "^1.5.0"
+    futoin-hkdf "^1.5.1"
     libsignal "git+https://github.com/adiwajshing/libsignal-node"
     music-metadata "^7.12.3"
     node-cache "^5.1.2"
@@ -2701,7 +2701,7 @@ function-bind@^1.1.1:
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
   integrity sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==
 
-futoin-hkdf@^1.5.0:
+futoin-hkdf@^1.5.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/futoin-hkdf/-/futoin-hkdf-1.5.1.tgz#141f00427bc9950b38a42aa786b99c318b9b688d"
   integrity sha512-g5d0Qp7ks55hYmYmfqn4Nz18XH49lcCR+vvIvHT92xXnsJaGZmY1EtWQWilJ6BQp57heCIXM/rRo+AFep8hGgg==
@@ -3279,9 +3279,9 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
 
-"libsignal@git+https://github.com/adiwajshing/libsignal-node":
+"libsignal@git+https://github.com/adiwajshing/libsignal-node.git":
   version "2.0.1"
-  resolved "git+https://github.com/adiwajshing/libsignal-node#11dbd962ea108187c79a7c46fe4d6f790e23da97"
+  resolved "git+https://github.com/adiwajshing/libsignal-node.git#11dbd962ea108187c79a7c46fe4d6f790e23da97"
   dependencies:
     curve25519-js "^0.0.4"
     protobufjs "6.8.8"
@@ -3777,10 +3777,10 @@ node-id3@^0.2.6:
   dependencies:
     iconv-lite "0.6.2"
 
-node-myanimelist@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/node-myanimelist/-/node-myanimelist-4.1.0.tgz#bd825c363f53273a0ec11768f34d04a0775964b7"
-  integrity sha512-kgPSDtqkklS4TSqsZYOr4aCtO8QJb8VVlU12TJhl6NCHx1EOPFzXlgaZH5bAElJiH3eFPiZeENhNB31UEx6f2g==
+node-myanimelist@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/node-myanimelist/-/node-myanimelist-4.1.2.tgz#f067957ee657d342903c122fada024d0953745d2"
+  integrity sha512-afPpwAiv5oMf4HCTNoFQe+wfCTgkk75GUJvjBT6EqnVyqclQ4higNPASsfeV84T3psHnkUAQhRtyXuAWKJpxjw==
   dependencies:
     axios "^0.25.0"
     url-join "^4.0.1"

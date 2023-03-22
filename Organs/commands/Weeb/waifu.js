@@ -16,26 +16,7 @@ module.exports = {
         args
     }) => {
         let wife = await axios.get('https://api.waifu.pics/sfw/waifu')
-        let buttons = [
-            {
-                buttonId: `${prefix} wife`,
-                buttonText: {
-                    displayText: '>>'
-                },
-                type: 1
-            }
-    ]
-        
-        let buttonMessage = {
-            image: {
-                url: wife.data.url
-            },
-            caption: `*✈ Here you Go*`,
-            footer: `*©Eternity-Team*`,
-            buttons: buttons,
-            headerType: 4
-        }
-        client.sendMessage(m.from, buttonMessage, {
+        client.sendMessage(m.from,{image:{url:wife.data.url},caption: `*✈ Here you Go*`}, {
             quoted: m
         })
         

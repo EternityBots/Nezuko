@@ -11,27 +11,12 @@ module.exports = {
   category: "Weeb",
   start: async (client, m, { command, prefix, text, args }) => {
     let wife = "https://cosplay-lovers-4pnv.onrender.com/cosplay";
-    let buttons = [
+    client.sendMessage(
+      m.from,
+      { image: { url: wife } },
       {
-        buttonId: `${prefix}cos`,
-        buttonText: {
-          displayText: ">>",
-        },
-        type: 1,
-      },
-    ];
-
-    let buttonMessage = {
-      image: {
-        url: wife,
-      },
-      caption: `*✈ Here you Go*`,
-      footer: `*©Eternity-Team*`,
-      buttons: buttons,
-      headerType: 4,
-    };
-    client.sendMessage(m.from, buttonMessage, {
-      quoted: m,
-    });
+        quoted: m,
+      }
+    );
   },
 };

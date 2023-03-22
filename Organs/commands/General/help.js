@@ -80,7 +80,8 @@ module.exports = {
           .map((cmd) => cmd.name)
           .join(", ")}\`\`\`\n\n`;
       }
-      txt += `📗 Type *${prefix}help* <Command-Name> or <Command-Name> --info\n`;
+      txt += `📗 Type *${prefix}help* <Command-Name> or <Command-Name> --info\n\n`;
+      txt += `*©Eternity-Team*`
       const eternity = [
         "https://images3.alphacoders.com/107/1078895.png",
         "https://images6.alphacoders.com/103/1037400.png",
@@ -98,27 +99,7 @@ module.exports = {
       ];
       const eternitylogo =
         eternity[Math.floor(Math.random() * eternity.length)];
-      const Button = [
-        {
-          buttonId: `${prefix}nezuko`,
-          buttonText: { displayText: "🌟 Script" },
-          type: 2,
-        },
-        {
-          buttonId: `${prefix}support`,
-          buttonText: { displayText: "🎐 Support" },
-          type: 1,
-        },
-      ];
-      let hbutto = {
-        image: { url: eternitylogo },
-        caption: txt,
-        footer: "©Eternity-Team",
-        buttons: Button,
-        headerType: 4,
-      };
-
-      client.sendMessage(m.from, hbutto, { quoted: m });
+      client.sendMessage(m.from, {image:{url:eternitylogo}, caption:txt}, { quoted: m });
     }
   },
 };

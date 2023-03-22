@@ -25,27 +25,7 @@ module.exports = {
         })
         .catch(() => null);
       const i = Math.floor(Math.random() * wallpaper.length);
-
-      let buttons = [
-        {
-          buttonId: `${prefix}wallpaper ${im[0]}`,
-          buttonText: {
-            displayText: ">>",
-          },
-          type: 1,
-        },
-      ];
-
-      let buttonMessage = {
-        image: {
-          url: wallpaper[i].image,
-        },
-        caption: `*Search term:* ${im[0]}`,
-        footer: `*©Eternity-Team*`,
-        buttons: buttons,
-        headerType: 4,
-      };
-      client.sendMessage(m.from, buttonMessage, {
+      client.sendMessage(m.from, {image:{url:wallpaper[i].image}}, {
         quoted: m,
       });
     }
