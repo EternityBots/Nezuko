@@ -3279,9 +3279,9 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
 
-"libsignal@git+https://github.com/adiwajshing/libsignal-node.git":
+"libsignal@git+https://github.com/adiwajshing/libsignal-node":
   version "2.0.1"
-  resolved "git+https://github.com/adiwajshing/libsignal-node.git#11dbd962ea108187c79a7c46fe4d6f790e23da97"
+  resolved "git+https://github.com/adiwajshing/libsignal-node#11dbd962ea108187c79a7c46fe4d6f790e23da97"
   dependencies:
     curve25519-js "^0.0.4"
     protobufjs "6.8.8"
@@ -5424,10 +5424,10 @@ youtube-yts@^2.0.0:
     minimist "~1.2.5"
     node-fzf "~0.5.1"
 
-youtubedl-core@^4.11.2:
-  version "4.11.2"
-  resolved "https://registry.yarnpkg.com/youtubedl-core/-/youtubedl-core-4.11.2.tgz#82a47bc7613745f4c538ae1ddf60fd871ae8e2fb"
-  integrity sha512-jrcw0x0YiRZ3oM04mNha9bw7S7/o4gJYaNKhG9gplwO6akB5tsMDA3kT6WesgXI26VOp1HXbMX6yAVS1EQEWbA==
+youtubedl-core@^4.11.3:
+  version "4.11.3"
+  resolved "https://registry.yarnpkg.com/youtubedl-core/-/youtubedl-core-4.11.3.tgz#1e67ee413a36d8c347d0102e2d320a011ff41842"
+  integrity sha512-SE4h9yx0kZ9COQZWMcX2lHF5zDdqMloeheKB5Rn4aPDyxh9IzIzz+1NYNcNgDon+Bsh4VQQQhOYtzVpcryWBOw==
   dependencies:
     m3u8stream "^0.8.6"
     miniget "^4.2.2"
