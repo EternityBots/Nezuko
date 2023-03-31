@@ -27,7 +27,8 @@
             "required": false
         },
         "WEATHER_API": {
-            "description": "Weather API key for weather report (Not Required)"
+            "description": "Weather API key for weather report (Not Required)",
+            "required": false
         },
         "MAL_USERNAME": {
             "description": "Your username for myanimelist.net to make anime and manga search",
