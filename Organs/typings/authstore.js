@@ -1,3 +1,11 @@
+/*****
+
+Credits:- 
+https://github.com/LuckyYam/WhatsApp-bot/
+
+*****/
+
+
 const { initAuthCreds, BufferJSON, proto } = require('@adiwajshing/baileys')
 const Database = require('./database')
 
