@@ -38,11 +38,11 @@ Nezuko is free and open-source software licensed under the [GNU Affero General P
 
 ## KOYEB
 
-[![Deploy to Koyeb](https://raw.githubusercontent.com/BinBashBanana/deploy-buttons/main/buttons/remade/koyeb.svg)](https://app.koyeb.com/apps/deploy?type=docker&image=quay.io/raysenpai69/nezuko:main&env[PORT]=8000&env[PREFIX]&&env[MONGODB]&&env[SESSION_ID]=NEZUKO&env[WEATHER_API]&&env[GOOGLE_API]&&env[MODS]&&env[MAL_USERNAME]=PratyushOP&env[MAL_PASSWORD]=8scv98gxDYHVBry&name=nezuko)
+[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/apps/deploy?type=docker&image=quay.io/raysenpai69/nezuko:main&env[PORT]=8000&env[PREFIX]&&env[MONGODB]&&env[SESSION_ID]=NEZUKO&env[WEATHER_API]&&env[GOOGLE_API]&&env[MODS]&&env[MAL_USERNAME]=PratyushOP&env[MAL_PASSWORD]=8scv98gxDYHVBry&name=nezuko)
 
 ## Repl.it
 
-[![Run on Repl.it](https://raw.githubusercontent.com/BinBashBanana/deploy-buttons/main/buttons/remade/replit.svg)](https://repl.it/github/EternityBots/Nezuko)
+[![Run on Repl.it](https://replit.com/badge/github/EternityBots/Nezuko)](https://replit.com/new/github/EternityBots/Nezuko)
 
 ## Heroku
 
