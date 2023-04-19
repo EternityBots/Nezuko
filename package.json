@@ -5,7 +5,7 @@
   "main": "heart.js",
   "type": "commonjs",
   "dependencies": {
-    "@adiwajshing/baileys": "5.0.0",
+    "@adiwajshing/baileys": "github:Auties00/Baileys",
     "@adiwajshing/keyed-db": "^0.2.4",
     "@canvas-fonts/arial-bold": "^1.0.4",
     "@hapi/boom": "^10.0.1",
