@@ -4,7 +4,7 @@ const {
   generateWAMessage,
   areJidsSameUser,
   proto,
-} = require("@ferdiz-afk/baileys");
+} = require("@whiskeysockets/baileys");
 const { Function } = require("../lib");
 const { Collection, Simple } = require("../Organs/typings");
 const { isUrl, isNumber } = Function;

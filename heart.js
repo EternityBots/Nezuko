@@ -13,7 +13,7 @@ const {
   useSingleFileLegacyAuthState,
   DEFAULT_CONNECTION_CONFIG,
   DEFAULT_LEGACY_CONNECTION_CONFIG,
-} = require("@ferdiz-afk/baileys");
+} = require("@whiskeysockets/baileys");
 const fs = require("fs");
 const chalk = require("chalk");
 const pino = require("pino");
@@ -38,7 +38,7 @@ const { QuickDB } = require("quick.db");
 global.db = new QuickDB();
 const Auth = require("./Organs/typings/authstore");
 const { join } = require("path");
-const { fetchLatestBaileysVersion } = require("@ferdiz-afk/baileys");
+const { fetchLatestBaileysVersion } = require("@whiskeysockets/baileys");
 const readCommands = () => {
   let dir = path.join(__dirname, "./Organs/commands");
   let dirs = fs.readdirSync(dir);

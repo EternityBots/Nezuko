@@ -7,8 +7,8 @@
   "dependencies": {
     "@adiwajshing/keyed-db": "^0.2.4",
     "@canvas-fonts/arial-bold": "^1.0.4",
-    "@ferdiz-afk/baileys": "^5.1.6",
     "@hapi/boom": "^10.0.1",
+    "@whiskeysockets/baileys": "^6.0.0",
     "anime-wallpaper": "^1.1.1",
     "axios": "1.2.2",
     "better-sqlite3": "^8.0.1",
