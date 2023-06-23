@@ -11,4 +11,4 @@ COPY . /nezuko
 
 RUN yarn
 
-CMD ["sudo", "bash", "loop.sh"]
+CMD ["bash","loop.sh"]
