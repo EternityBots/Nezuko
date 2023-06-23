@@ -1,4 +1,4 @@
 while true
 do
-    node heart.js
+    yarn start
 done
