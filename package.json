@@ -30,7 +30,7 @@
     "lyric-music": "^1.0.0",
     "mathjs": "^11.8.1",
     "moment-timezone": "^0.5.41",
-    "mongoose": "^7.3.0",
+    "mongoose": "^7.3.3",
     "node-fetch": "^3.3.0",
     "node-id3": "^0.2.6",
     "node-myanimelist": "^4.1.2",
