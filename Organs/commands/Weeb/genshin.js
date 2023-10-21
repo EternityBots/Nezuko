@@ -1,30 +1,29 @@
 const genshindb = require('genshin-db');
-const fs=require("fs")
 module.exports={
     name:"genshin",
-    alias:["gchara", "genshinchara"],
+    alias:["gchara", "genshinchara", "gc", "genshin"],
     usage:"=gchara [name]",
     desc:"Gives you the data of the given genshin character.",
     category:"Weeb",
     react:"✅",
 
-    start:async(client,m,{command,prefix,args})=>{
-if (!q) return m.reply(`*Please provide me a genshin character name*`)
+    start:async(client,m,{command,prefix,args,text})=>{
+if (!text) return m.reply(`*Please provide me a genshin character name*`)
 try {
-const genshin = await genshindb.characters(q);
+const genshin = genshindb.characters(`${text}`);
 if (!genshin) return m.reply(`Can't find the character data`)
 const reply =
 `💎 *Name:* ${genshin.name}
-💠 *Elemnent:* ${genshin.element}
-📛 *Weapon:* ${genshin.weapontype}
-🎗 *Speciality:* ${genshin.substat}
+💠 *Elemnent:* ${genshin.elementText}
+📛 *Weapon:* ${genshin.weaponText}
+🎗 *Speciality:* ${genshin.substatText}
 🌟 *Rarity:* ${genshin.rarity}
 🌸 *Gender:* ${genshin.gender}
 ❄ *Constellation:* ${genshin.constellation}
 ⛩ *Region:* ${genshin.region}
 💮 *Affiliation:* ${genshin.affiliation}
 🎁 *Birthday:* ${genshin.birthday}
-💛 *Description:* ${genshin.description}
+💛 *Description:* \n${genshin.description}
 🌐 *URL:* ${genshin.url.fandom}`
 await client.sendMessage(m.from,{image:{url:genshin.images.cover2}, caption:reply},{quoted:m})
 } catch (err) {
