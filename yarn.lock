@@ -4116,7 +4116,7 @@ youtubedl-core@^4.11.4:
     miniget "^4.2.2"
     sax "^1.1.3"
 
-youtubedl-core@^4.11.5:
+youtubedl-core@^4.11.7:
   version "4.11.7"
   resolved "https://registry.yarnpkg.com/youtubedl-core/-/youtubedl-core-4.11.7.tgz#18f36762af7b2a8f3324786879b2c2b9001dbce0"
   integrity sha512-UVH0ofK9JFaxgnW41x+NZxkIVHk29AdQIMv9dZXvajrxn4rkwUGSs9oLoH9+3938j0lTL/Fqg5HCH1j3isbmsw==
