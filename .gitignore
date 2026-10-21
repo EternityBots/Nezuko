@@ -1,5 +1,5 @@
 node_modules
-test.json
+dist
 .env
-yarn-error.log
+*.log
 json.sqlite

@@ -1,14 +1,17 @@
-FROM fedora:38
+FROM oven/bun:1-debian
 
-RUN sudo dnf -y update &&\
-    sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm &&\
-    sudo dnf install -y git ffmpeg ImageMagick nodejs yarnpkg libwebp &&\
-    sudo dnf clean all -y
+# ffmpeg: stickers, GIFs and merging YouTube audio/video tracks
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends ffmpeg ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /nezuko
 
-COPY . /nezuko
+COPY package.json bun.lock ./
+RUN bun install --frozen-lockfile --production
 
-RUN yarn
+COPY . .
 
-CMD ["bash","loop.sh"]
+ENV NODE_ENV=production
+EXPOSE 8080
+CMD ["bun", "run", "src/index.ts"]

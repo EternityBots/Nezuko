@@ -1,55 +1,21 @@
 {
-    "name": "Nezuko",
-    "description": "A simple and easy-to-use WhatsApp bot project based on Multi-Device Baileys and written in JavaScript",
-    "keywords": [
-        "bot",
-        "whatsapp"
-    ],
-    "logo": "https://avatars.githubusercontent.com/u/117456661",
-    "website": "https://github.com/EternityBots/Nezuko",
-    "repository": "https://github.com/EternityBots/Nezuko.git",
-    "success_url": "/",
-    "env": {
-        "PREFIX": {
-            "description": "Prefix of your bot"
-        },
-        "SESSION_ID": {
-            "description": "A string for the session to be classified and to get access to the server endpoints"
-        },
-        "MODS": {
-            "description": "The phone numbers of the users who you want to be admin for the bot (should be in international format without + and multiple numbers must be separated by a comma \",\")"
-        },
-        "MONGODB": {
-            "description": "A secret String for Mongodb Connection.(Required)"
-        },
-        "GOOGLE_API": {
-            "description": "Google API key for Google searches (Not Required)",
-            "required": false
-        },
-        "WEATHER_API": {
-            "description": "Weather API key for weather report (Not Required)",
-            "required": false
-        },
-        "MAL_USERNAME": {
-            "description": "Your username for myanimelist.net to make anime and manga search",
-            "value":"PratyushOP",
-            "required": false
-        },
-        "MAL_PASSWORD": {
-            "description": "Your password for myanimelist.net to make anime and manga search",
-            "value":"8scv98gxDYHVBry",
-            "required": false
-        }
-    },
-    "buildpacks": [
-        {
-            "url": "heroku/nodejs"
-        },
-        {
-            "url": "https://github.com/clhuang/heroku-buildpack-webp-binaries.git"
-        },
-        {
-            "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git"
-        }
-    ]
+  "name": "Nezuko",
+  "description": "A simple and easy-to-use WhatsApp bot based on Multi-Device Baileys, written in TypeScript and running on Bun",
+  "keywords": ["bot", "whatsapp", "baileys", "bun", "typescript"],
+  "logo": "https://avatars.githubusercontent.com/u/117456661",
+  "website": "https://github.com/EternityBots/Nezuko",
+  "repository": "https://github.com/EternityBots/Nezuko.git",
+  "success_url": "/",
+  "stack": "container",
+  "env": {
+    "MONGODB": { "description": "MongoDB connection string (required)" },
+    "MODS": { "description": "Owner phone numbers in international format without +, comma separated" },
+    "PREFIX": { "description": "Command prefix", "value": "." },
+    "SESSION_ID": { "description": "Session name, also the password for the /qr page", "value": "NEZUKO" },
+    "PAIRING_NUMBER": { "description": "Bot number (digits only) to link with a pairing code instead of a QR code", "required": false },
+    "GOOGLE_API": { "description": "Google Custom Search API key", "required": false },
+    "WEATHER_API": { "description": "weatherapi.com API key", "required": false },
+    "SPOTIFY_CLIENT_ID": { "description": "Spotify app client ID", "required": false },
+    "SPOTIFY_CLIENT_SECRET": { "description": "Spotify app client secret", "required": false }
+  }
 }
