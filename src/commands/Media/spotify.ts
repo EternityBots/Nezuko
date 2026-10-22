@@ -1,4 +1,5 @@
 import { getSpotifyTrack } from '../../lib/spotify.js'
+import { progressMessage } from '../../lib/progress.js'
 import { downloadAudio, searchSong } from '../../lib/youtube.js'
 import { defineCommand } from '../../types.js'
 
@@ -22,7 +23,12 @@ export default defineCommand({
 
 		const song = await searchSong(`${track.name} ${track.artists.join(' ')}`.trim())
 		if (!song) return m.reply("Couldn't find this track on YouTube Music")
-		const { buffer, mimetype } = await downloadAudio(song.id)
+		const progress = await progressMessage(client, m, '🎧 Downloading audio...')
+		const { buffer, mimetype } = await downloadAudio(song.id, { onProgress: p => progress.update(p) }).catch(async err => {
+			await progress.fail('❌ Download failed')
+			throw err
+		})
+		await progress.done('📤 Sending...')
 		await client.sendMessage(m.from, { audio: buffer, mimetype, fileName: `${track.name}.m4a` }, { quoted: card ?? m.raw })
 	}
 })

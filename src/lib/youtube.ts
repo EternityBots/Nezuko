@@ -1,10 +1,19 @@
 import vm from 'node:vm'
-import { Innertube, Platform, UniversalCache, YTNodes, type Types, type YT } from 'youtubei.js'
-
-type VideoInfo = YT.VideoInfo
+import { Innertube, Log, Platform, UniversalCache, YTNodes, type Types, type YT } from 'youtubei.js'
 import { config } from '../config.js'
 import { muxAudioVideo } from './ffmpeg.js'
 import { streamToBuffer } from './http.js'
+import { applyPoToken, generatePoToken, type PoToken } from './po-token.js'
+import { ytdlpAudio, ytdlpVersion, ytdlpVideo, type OnProgress, type YtdlpResult } from './ytdlp.js'
+
+export type { DownloadProgress, OnProgress } from './ytdlp.js'
+
+type VideoInfo = YT.VideoInfo
+type InnerTubeClient = NonNullable<NonNullable<Parameters<Innertube["getInfo"]>[1]>["client"]>
+
+// YouTube.js prints a long warning every time YouTube adds a UI element it doesn't know yet.
+// They are harmless, so only show real errors (set LOG_LEVEL=debug to see everything).
+Log.setLevel(config.logLevel === 'debug' ? Log.Level.DEBUG : Log.Level.ERROR)
 
 /**
  * youtubei.js needs a JavaScript evaluator to decipher stream URLs.
@@ -26,7 +35,8 @@ let instance: Promise<Innertube> | null = null
 export const getYouTube = () => {
 	instance ??= Innertube.create({
 		cache: new UniversalCache(true),
-		generate_session_locally: true,
+		// Real visitor data from YouTube (cached on disk), so PO tokens bound to it are accepted.
+		generate_session_locally: false,
 		cookie: config.youtubeCookie,
 		po_token: config.youtubePoToken
 	}).catch(err => {
@@ -34,6 +44,41 @@ export const getYouTube = () => {
 		throw err
 	})
 	return instance
+}
+
+let autoToken: PoToken | null = null
+let tokenJob: Promise<void> | null = null
+let lastTokenError: string | null = null
+
+export type PoTokenStatus = { source: 'manual' | 'auto' | 'none'; error?: string }
+
+/** Make sure the session carries a valid PO token (generated automatically unless one is configured). */
+export const ensurePoToken = async (): Promise<PoTokenStatus> => {
+	if (config.youtubePoToken) return { source: 'manual' }
+	if (!config.youtubeAutoPoToken) return { source: 'none' }
+	if (autoToken && autoToken.expires > Date.now()) return { source: 'auto' }
+	tokenJob ??= (async () => {
+		try {
+			const yt = await getYouTube()
+			autoToken = await generatePoToken(yt)
+			applyPoToken(yt, autoToken.token)
+			lastTokenError = null
+			console.log('[youtube] Generated a PO token')
+		} catch (err) {
+			autoToken = null
+			lastTokenError = err instanceof Error ? err.message : String(err)
+			console.warn(`[youtube] Could not generate a PO token: ${lastTokenError}`)
+		}
+	})().finally(() => {
+		tokenJob = null
+	})
+	await tokenJob
+	return autoToken ? { source: 'auto' } : { source: 'none', error: lastTokenError ?? undefined }
+}
+
+/** Forget the current auto token (e.g. after YouTube rejects it); the next download mints a new one. */
+const dropAutoToken = () => {
+	autoToken = null
 }
 
 const ID_REGEX = /(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/|v\/)|youtu\.be\/|music\.youtube\.com\/watch\?(?:.*&)?v=)([\w-]{11})/
@@ -130,33 +175,117 @@ export const getLyrics = async (query: string) => {
 }
 
 /**
- * Clients to try for streaming, in order. YouTube regularly changes which clients
- * need a PO token; trying several keeps downloads working when one breaks.
+ * Clients to try for downloads, in order. Which ones work depends on the network: YouTube's
+ * bot check blocks some clients on some IPs and not others, so the bot tries several.
+ *
+ * - MWEB and WEB_EMBEDDED work with a PO token, which the bot generates automatically (po-token.ts).
+ * - IOS sometimes works without one.
+ * - ANDROID_VR can't play "made for kids" videos; WEB_EMBEDDED only plays embeddable ones.
+ * - TV needs account cookies (YT_COOKIE), otherwise YouTube asks it to sign in.
+ * - WEB only returns SABR formats with no download URL, so it is never used here.
+ *
+ * Run `bun run yt-check <link>` to see which work for you, and set YT_CLIENTS=... to pin them.
  */
-const STREAM_CLIENTS = ['ANDROID_VR', 'TV', 'WEB_EMBEDDED', 'IOS', 'WEB'] as const
+export const streamClients = (): InnerTubeClient[] => {
+	const custom = process.env.YT_CLIENTS?.split(',').map(c => c.trim().toUpperCase()).filter(Boolean)
+	if (custom?.length) return custom as InnerTubeClient[]
+	// With a PO token the web clients work, and MWEB gives the most formats.
+	const hasToken = Boolean(config.youtubePoToken || autoToken)
+	const clients: InnerTubeClient[] = hasToken ? ['MWEB', 'WEB_EMBEDDED', 'IOS', 'ANDROID_VR'] : ['IOS', 'MWEB', 'ANDROID_VR', 'WEB_EMBEDDED']
+	if (config.youtubeCookie) clients.push('TV')
+	return clients
+}
 
-const withStreamingInfo = async <T>(id: string, task: (info: VideoInfo) => Promise<T>): Promise<T> => {
+/** Formats that can actually be downloaded (SABR-only formats have neither a URL nor a cipher). */
+const hasDirectUrls = (info: VideoInfo) => {
+	const formats = [...(info.streaming_data?.formats ?? []), ...(info.streaming_data?.adaptive_formats ?? [])]
+	return formats.some(f => f.url || f.signature_cipher || f.cipher)
+}
+
+export class YouTubeDownloadError extends Error {
+	declare attempts: { client: string; reason: string }[]
+	constructor(attempts: { client: string; reason: string }[]) {
+		const unique = [...new Set(attempts.map(a => a.reason))]
+		super(unique.length === 1 ? unique[0] : attempts.map(a => `${a.client}: ${a.reason}`).join(' | '))
+		// Non-enumerable, so console logs don't dump the whole array.
+		Object.defineProperty(this, 'attempts', { value: attempts, enumerable: false })
+	}
+}
+
+/** Readable reason, including the HTTP status when YouTube refused the download. */
+const describeError = (err: unknown) => {
+	if (!(err instanceof Error)) return String(err)
+	const status = (err as { info?: { response?: { status?: number } } }).info?.response?.status
+	if (status === 403) return 'HTTP 403: YouTube refused the download'
+	return status ? `${err.message} (HTTP ${status})` : err.message
+}
+
+const withStreamingInfo = async <T>(id: string, task: (info: VideoInfo) => Promise<T>, clients?: InnerTubeClient[]): Promise<T> => {
+	await ensurePoToken()
+	clients ??= streamClients()
 	const yt = await getYouTube()
-	let lastError: unknown
-	for (const client of STREAM_CLIENTS) {
+	const attempts: { client: string; reason: string }[] = []
+	for (const client of clients) {
+		const fail = (reason: string) => {
+			attempts.push({ client, reason })
+			console.warn(`[youtube] ${id} via ${client}: ${reason}`)
+		}
 		try {
-			const info = await yt.getInfo(id, { client })
+			// Player requests take a token bound to the video; stream URLs use the session token.
+			const po_token = autoToken ? await autoToken.mintFor(id).catch(() => undefined) : undefined
+			const info = await yt.getInfo(id, { client, po_token })
 			const status = info.playability_status?.status
 			if (status && status !== 'OK') {
-				lastError = new Error(info.playability_status?.reason || `Video is not playable (${status})`)
+				fail(info.playability_status?.reason || `not playable (${status})`)
 				continue
 			}
-			if (!info.streaming_data) {
-				lastError = new Error('No streaming data')
+			if (!info.streaming_data || !hasDirectUrls(info)) {
+				fail('no downloadable formats (SABR only)')
 				continue
 			}
 			return await task(info)
 		} catch (err) {
-			lastError = err
+			// Our own limits (too long / too big) won't change with another client.
+			if (err instanceof Error && /longer than|too large/i.test(err.message)) throw err
+			fail(describeError(err))
 		}
 	}
-	throw lastError instanceof Error ? lastError : new Error('Could not download this video')
+	// If YouTube rejected the token everywhere, mint a fresh one next time.
+	if (attempts.some(a => a.reason.startsWith('HTTP 403'))) dropAutoToken()
+	throw new YouTubeDownloadError(attempts)
 }
+
+const isLimitError = (err: unknown) => err instanceof Error && /longer than|too large/i.test(err.message)
+
+/**
+ * Pick the downloader. auto: yt-dlp first when installed, falling back to youtubei.js;
+ * without yt-dlp, youtubei.js only. Passing explicit clients (yt-check) always uses youtubei.js.
+ */
+const withFallback = async <T>(id: string, viaYoutubei: () => Promise<T>, viaYtdlp: () => Promise<T>, explicitClients?: boolean): Promise<T> => {
+	if (explicitClients || config.youtubeDownloader === 'youtubei') return viaYoutubei()
+	if (config.youtubeDownloader === 'yt-dlp') return viaYtdlp()
+	if (await ytdlpVersion()) {
+		try {
+			return await viaYtdlp()
+		} catch (err) {
+			if (isLimitError(err) || /skipped the video/.test(String(err))) throw err
+			console.warn(`[youtube] ${id}: yt-dlp failed (${err instanceof Error ? err.message : err}), trying youtubei.js`)
+		}
+	}
+	return viaYoutubei()
+}
+
+const detailsFromYtdlp = (id: string, meta: YtdlpResult['meta']): VideoDetails => ({
+	id,
+	url: `https://youtu.be/${id}`,
+	title: meta.title ?? id,
+	channel: meta.channel ?? 'Unknown',
+	seconds: meta.duration ?? 0,
+	views: 0,
+	description: '',
+	thumbnail: thumb(id),
+	published: meta.upload_date?.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3')
+})
 
 export interface VideoDetails {
 	id: string
@@ -194,18 +323,47 @@ const assertDuration = (seconds: number, maxMinutes: number) => {
 	if (seconds > maxMinutes * 60) throw new Error(`Video is longer than ${maxMinutes} minutes`)
 }
 
-/** Download the best AAC (m4a) audio track. WhatsApp plays it as-is, no conversion needed. */
-export const downloadAudio = async (id: string) =>
-	withStreamingInfo(id, async info => {
-		const details = detailsOf(info)
-		assertDuration(details.seconds, config.maxAudioMinutes)
-		const stream = await info.download({ type: 'audio', quality: 'best', format: 'mp4' })
-		const buffer = await streamToBuffer(stream, MAX_BYTES)
-		return { buffer, mimetype: 'audio/mp4', details }
-	})
+/**
+ * Download the best AAC (m4a) audio track. WhatsApp plays it as-is, no conversion needed.
+ * onProgress only fires when yt-dlp does the download.
+ */
+export const downloadAudio = async (id: string, { clients, onProgress }: { clients?: InnerTubeClient[]; onProgress?: OnProgress } = {}) =>
+	withFallback(
+		id,
+		() =>
+			withStreamingInfo(
+				id,
+				async info => {
+					const details = detailsOf(info)
+					assertDuration(details.seconds, config.maxAudioMinutes)
+					const stream = await info.download({ type: 'audio', quality: 'best', format: 'mp4' })
+					const buffer = await streamToBuffer(stream, MAX_BYTES)
+					return { buffer, mimetype: 'audio/mp4', details }
+				},
+				clients
+			),
+		async () => {
+			const r = await ytdlpAudio(id, onProgress)
+			return { buffer: r.buffer, mimetype: r.ext === 'm4a' ? 'audio/mp4' : `audio/${r.ext}`, details: detailsFromYtdlp(id, r.meta) }
+		},
+		Boolean(clients)
+	)
 
-/** Download a video up to MAX_VIDEO_HEIGHT, muxing separate tracks with ffmpeg when needed. */
-export const downloadVideo = async (id: string, maxHeight = config.maxVideoHeight) =>
+/**
+ * Download a video up to MAX_VIDEO_HEIGHT, muxing separate tracks with ffmpeg when needed.
+ * onProgress only fires when yt-dlp does the download.
+ */
+export const downloadVideo = async (id: string, { maxHeight = config.maxVideoHeight, onProgress }: { maxHeight?: number; onProgress?: OnProgress } = {}) =>
+	withFallback(
+		id,
+		() => videoViaYoutubei(id, maxHeight),
+		async () => {
+			const r = await ytdlpVideo(id, maxHeight, onProgress)
+			return { buffer: r.buffer, quality: `up to ${maxHeight}p`, details: detailsFromYtdlp(id, r.meta) }
+		}
+	)
+
+const videoViaYoutubei = (id: string, maxHeight: number) =>
 	withStreamingInfo(id, async info => {
 		const details = detailsOf(info)
 		assertDuration(details.seconds, config.maxVideoMinutes)

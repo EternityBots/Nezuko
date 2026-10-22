@@ -23,7 +23,7 @@ export const levels = {
 		const doc = await Level.findOneAndUpdate(
 			{ userID: userId, guildID: GUILD },
 			{ $inc: { xp: amount }, $set: { lastUpdated: new Date() } },
-			{ upsert: true, new: true }
+			{ upsert: true, returnDocument: 'after' }
 		)
 		const level = levelFor(doc.xp)
 		if (level !== doc.level) {

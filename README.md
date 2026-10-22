@@ -42,6 +42,7 @@
 - [Bun](https://bun.sh) **1.2+** (or Node.js **20+**)
 - [ffmpeg](https://ffmpeg.org) (stickers, GIFs and YouTube videos)
 - A [MongoDB](https://www.mongodb.com/atlas) database (a free Atlas cluster is enough)
+- *Optional:* [yt-dlp](https://github.com/yt-dlp/yt-dlp), used as a fallback when YouTube blocks the built-in downloader (included in the Docker image)
 
 ## 🚀 Installation
 
@@ -74,6 +75,7 @@ npm run start:node
 | `bun run typecheck` | Type-check the project |
 | `bun test` | Run the tests |
 | `bun run reset-session` | Delete the saved WhatsApp session so you can link again |
+| `bun run yt-check <link>` | Test which YouTube clients can download from your machine |
 | `npm run build` / `npm run start:node` | Compile to `dist/` and run on Node.js |
 
 ## ⚙️ Configuration
@@ -92,10 +94,33 @@ All settings are environment variables (see [`.env.example`](.env.example)).
 | `WEATHER_API` | | [weatherapi.com](https://www.weatherapi.com) key for `weather` |
 | `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET` | | Full track details for `spotify` (works without them, with fewer details) |
 | `YT_COOKIE`, `YT_PO_TOKEN` | | Only if YouTube starts blocking downloads from your server (use a throwaway account) |
+| `YT_AUTO_PO_TOKEN` | | Generate YouTube PO tokens automatically (default `true`; off when `YT_COOKIE` or `YT_PO_TOKEN` is set) |
+| `YT_DOWNLOADER` | | `auto` (default: yt-dlp if installed, then YouTube.js), `youtubei`, or `yt-dlp` |
+| `YTDLP_PATH` | | Path to yt-dlp if it isn't on your PATH |
+| `YTDLP_ARGS` | | Extra yt-dlp options, e.g. `--cookies-from-browser firefox` when YouTube asks it to sign in |
+| `YT_CLIENTS` | | YouTube clients to try, e.g. `ANDROID_VR,WEB_EMBEDDED,TV` (see `bun run yt-check`) |
 | `MAX_AUDIO_MINUTES`, `MAX_VIDEO_MINUTES`, `MAX_VIDEO_HEIGHT` | | Download limits (defaults `20`, `10`, `720`) |
 | `LOG_LEVEL` | | Baileys log level (default `silent`) |
 
 `MAL_USERNAME` / `MAL_PASSWORD` are no longer needed: `anime` and `manga` use the public [Jikan](https://jikan.moe) API.
+
+## 🎬 If YouTube downloads fail
+
+YouTube now wants a **PO token** (proof that requests come from a real player) for most downloads. The bot generates one automatically with BotGuard via [bgutils-js](https://github.com/LuanRT/BgUtils), so normally nothing needs configuring.
+
+Run `bun run yt-check <youtube link>` on the machine where the bot runs. It shows whether the PO token was generated and does a full test download with every YouTube client.
+
+- **Some client shows ✓:** put the working ones in `.env` as `YT_CLIENTS=...` if the script suggests it.
+- **TV says sign in / login required:** set `YT_COOKIE` with cookies from a throwaway account (log in to YouTube in an incognito window, copy the `Cookie` header from any youtube.com request in DevTools > Network, then close the window).
+- **YouTube.js is blocked on your network:** install yt-dlp and the bot falls back to it automatically. On Linux:
+  ```bash
+  sudo curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux -o /usr/local/bin/yt-dlp
+  sudo chmod a+rx /usr/local/bin/yt-dlp
+  ```
+  (Windows/macOS builds are on the [releases page](https://github.com/yt-dlp/yt-dlp/releases/latest).) If `yt-check` shows only yt-dlp works, set `YT_DOWNLOADER=yt-dlp` to skip the failing attempts. Update it now and then with `yt-dlp -U`. Its progress is printed in the bot's console as `[yt-dlp] ...` lines.
+- **yt-dlp says "Sign in to confirm you're not a bot":** your IP is flagged. Let yt-dlp use cookies from a browser on the same machine: `YTDLP_ARGS=--cookies-from-browser firefox` (or `chrome`, `"chrome:Profile 2"` for a specific profile). Use a browser profile logged into a throwaway account, not your main one.
+- **Everything fails:** run `bun update youtubei.js` (YouTube changes often and fixes ship quickly), or try a different network. Cloud server IPs are often blocked.
+- `web` always shows "SABR only"; that's expected, YouTube no longer gives it direct download links.
 
 ## ☁️ Deploy
 

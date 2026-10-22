@@ -9,7 +9,9 @@ export default defineCommand({
 	react: '✅',
 	cool: 3,
 	start: async (client, m) => {
-		const { url } = await fetchJson<{ url: string }>('https://api.waifu.pics/sfw/waifu')
+		const { items } = await fetchJson<{ items: { url: string }[] }>('https://api.waifu.im/images?IncludedTags=waifu')
+		const url = items?.[0]?.url
+		if (!url) throw new Error('No waifu image found')
 		await m.reply({ image: { url }, caption: '*✈ Here you go*' })
 	}
 })

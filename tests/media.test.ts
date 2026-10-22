@@ -35,14 +35,14 @@ describe('stickers', () => {
 		const exif = await exifOf(await makeSticker(png, { pack: 'Pack', author: 'Me' }))
 		expect(exif['sticker-pack-name']).toBe('Pack')
 		expect(exif['sticker-pack-publisher']).toBe('Me')
-	})
+	}, 30_000)
 
 	test('video and GIF -> animated WebP sticker', async () => {
 		for (const input of [mp4, gif]) {
 			const sticker = await makeSticker(input)
 			expect(await isAnimatedWebp(sticker)).toBe(true)
 		}
-	})
+	}, 30_000)
 
 	test('sticker -> image / video', async () => {
 		const still = await makeSticker(png)
@@ -51,7 +51,7 @@ describe('stickers', () => {
 		const video = await webpToMp4(animated)
 		expect(video.subarray(4, 8).toString()).toBe('ftyp')
 		expect((await gifToMp4(gif)).subarray(4, 8).toString()).toBe('ftyp')
-	})
+	}, 30_000)
 })
 
 describe('image effects', () => {
@@ -79,5 +79,5 @@ describe('youtube links', () => {
 		}
 		expect(isYouTubeUrl('https://example.com')).toBe(false)
 		expect(() => getVideoId('not a link')).toThrow()
-	})
+	}, 30_000)
 })

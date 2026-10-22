@@ -29,7 +29,7 @@ export default defineCommand({
 		let caption = `*🪪 Name*: ${name}\n\n*🍥 Number*: ${userPart(pn ?? jid)}\n\n*🎌 Bio*: ${status || 'None'}\n\n`
 		caption += `*🎯 XP*: ${stats.xp} / ${levels.xpFor(stats.level + 1)}\n\n*🔮 Level*: ${stats.level}\n\n*🏮 Role*: ${profileRole(stats.level)}\n`
 		if (groupName) caption += `\n*🌊 Group*: ${groupName}\n`
-		if (!other && isAdmin) caption += `*〽️ Admin*: true\n`
+		if (!other && isAdmin) caption += `\n*〽️ Admin*: true\n`
 
 		await m.reply({ image: await client.getAvatar(jid), caption })
 	}

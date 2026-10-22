@@ -40,6 +40,13 @@ export const config = {
 	youtubeCookie: env('YT_COOKIE'),
 	/** Optional Proof-of-Origin token for YouTube streaming. */
 	youtubePoToken: env('YT_PO_TOKEN'),
+	/** Generate PO tokens automatically with BotGuard (on unless YT_AUTO_PO_TOKEN=false or YT_COOKIE is set). */
+	youtubeAutoPoToken: env('YT_AUTO_PO_TOKEN') !== 'false' && !env('YT_COOKIE') && !env('YT_PO_TOKEN'),
+	/** auto: yt-dlp if installed, then youtubei.js | youtubei: never use yt-dlp | yt-dlp: always use yt-dlp */
+	youtubeDownloader: (['auto', 'youtubei', 'yt-dlp'].includes(env('YT_DOWNLOADER') ?? '') ? env('YT_DOWNLOADER') : 'auto') as
+		| 'auto'
+		| 'youtubei'
+		| 'yt-dlp',
 	maxAudioMinutes: int('MAX_AUDIO_MINUTES', 20),
 	maxVideoMinutes: int('MAX_VIDEO_MINUTES', 10),
 	maxVideoHeight: int('MAX_VIDEO_HEIGHT', 720)

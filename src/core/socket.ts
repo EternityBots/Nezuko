@@ -6,8 +6,10 @@ import makeWASocket, {
 	isLidUser,
 	jidNormalizedUser,
 	makeCacheableSignalKeyStore,
+	type AnyMessageContent,
 	type BaileysEventMap,
 	type GroupMetadata,
+	type MiscMessageGenerationOptions,
 	type WAMessage,
 	type WAMessageKey,
 	type proto
@@ -78,8 +80,10 @@ export const startSocket = async (options: StartOptions): Promise<Client> => {
 
 	// Remember everything we send (for retries) and mark it as ours.
 	const send = sock.sendMessage.bind(sock)
-	sock.sendMessage = (async (...args: Parameters<typeof send>) => {
-		const sent = await send(...args)
+	sock.sendMessage = (async (jid: string, content: AnyMessageContent, options?: MiscMessageGenerationOptions) => {
+		// Baileys has no upload time limit by default, so a stalled media upload would hang
+		// the command forever with no error. Fail after 2 minutes instead.
+		const sent = await send(jid, content, { mediaUploadTimeoutMs: 120_000, ...options })
 		if (sent?.key.id) sentByBot.set(sent.key.id, true)
 		rememberMessage(sent)
 		return sent

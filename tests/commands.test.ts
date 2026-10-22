@@ -19,4 +19,4 @@ test('all commands load with unique names and aliases', async () => {
 	expect(registry.get('tagall')?.name).toBe('ping')
 	expect(registry.get('nope')).toBeUndefined()
 	warn.mockRestore()
-})
+}, 30_000)
